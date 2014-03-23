@@ -8,7 +8,7 @@
 
 .item-list li {
     display: block;
-    height: 300px;
+    height: 200px;
     width: 200px;
     float: left;
     border: 1px dashed #ccc;
@@ -16,4 +16,12 @@
     text-align: center;
     padding: 3px;
     overflow: hidden;
+}
+#message {
+    position: absolute;
+    background: #333;
+    color: red;
+    border-radius: 3px;
+    padding: 5px 31px;
+    left: 50%;
 }

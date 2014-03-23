@@ -3,6 +3,11 @@
 from util.simpleOrm import HqOrm, join_
 from config import configs
 
+#form
+from wtforms_tornado import Form
+from wtforms.fields import StringField, DecimalField
+from wtforms.validators import required
+
 
 class Item(HqOrm):
     """ 商品基本信息
@@ -35,13 +40,16 @@ class Item(HqOrm):
             join=join_(table='price',
                        on_str='price.item_id=item.id',),
             order_by='item.created desc',
+            fields='item.*, price.*',
         )
+        print 'items****: ', items
         result = {}
         for item in items:
             if item.id in result:
                 result[item.id].append(item)
             else:
                 result[item.id] = [item, ]
+        print 'result***: ', result
         return result
 
 
@@ -77,3 +85,19 @@ class HistoryPrice(HqOrm):
         'id', 'item_id', 'price_id', 'price', 'time',
     )
     _db_config = configs['db_config']
+
+
+class PriceForm(Form):
+
+    size = StringField()
+    brand = StringField()
+    color = StringField()
+    weight = StringField()
+    price = DecimalField()
+
+
+#  商品表单
+class ItemForm(Form):
+
+    title = StringField()
+    desc = StringField()

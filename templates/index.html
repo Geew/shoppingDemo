@@ -5,11 +5,11 @@
   <div class="row item-list">
     <ul>
       {% for item in items %}
-        {% set item = item[0] %}
+        {% set item = items[item][0] %}
         <li>
           <div class="">
             <a title="{{ item.title }}" href="/item/{{ item.item_id }}" target="_blank">
-              <img width="100" height="100" src="{{ item.images }}" >
+              <img width="100" height="100" src="/static/img/default-image.jpg" >
             </a>
           </div>
           <div class="">
