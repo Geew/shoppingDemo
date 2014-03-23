@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 商品列表 -->
+  <div class="row item-list">
+    <ul>
+      {% for item in items %}
+        {% set item = item[0] %}
+        <li>
+          <div class="">
+            <a title="{{ item.title }}" href="/item/{{ item.item_id }}" target="_blank">
+              <img width="100" height="100" src="{{ item.images }}" >
+            </a>
+          </div>
+          <div class="">
+            <a target="_blank" href="/item/{{ item.item_id }}">{{item.title}}</a>
+          </div>
+          <div class="p-price" sku="1070430397">
+            优惠价：<strong class="p-price">￥{{item.price}}</strong>
+          </div>
+        </li>
+      {% end %}
+    </ul>
+  </div>
+{% end %}

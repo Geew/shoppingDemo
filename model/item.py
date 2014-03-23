@@ -1,6 +1,6 @@
 # coding: utf8
 
-from util.simpleOrm import HqOrm
+from util.simpleOrm import HqOrm, join_
 from config import configs
 
 
@@ -13,12 +13,36 @@ class Item(HqOrm):
         'id', 'title', 'desc', 'category_id', 'category', 'mall', 'created',
     )
     _db_config = configs['db_config']
+    _echo = True
+
+    @classmethod
+    def get(cls, fields=None, **kwargs):
+        item = super(Item, cls).get(fields=fields, **kwargs)
+        if item:
+            item.prices = Price.find(item_id=item.id)
+        return item
 
     @property
-    def prices(self):
-        """ 商品各种类型的价格综合对象
+    def image(self):
+        ps = Price.find(item_id=self.id, limit=1)
+        return ps[0].images if ps else configs['default_image']
+
+    @classmethod
+    def explore(cls):
+        """ 获取全部商品信息, 包含价格, 每个商品为一个列表
         """
-        return Price.find(item_id=self.id)
+        items = cls.find(
+            join=join_(table='price',
+                       on_str='price.item_id=item.id',),
+            order_by='item.created desc',
+        )
+        result = {}
+        for item in items:
+            if item.id in result:
+                result[item.id].append(item)
+            else:
+                result[item.id] = [item, ]
+        return result
 
 
 class Category(HqOrm):

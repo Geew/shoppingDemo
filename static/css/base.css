@@ -1,0 +1,19 @@
+.container-fix {
+    margin-top: 70px;
+}
+
+.item-list ul {
+    list-style-type: none;
+}
+
+.item-list li {
+    display: block;
+    height: 300px;
+    width: 200px;
+    float: left;
+    border: 1px dashed #ccc;
+    margin: 10px;
+    text-align: center;
+    padding: 3px;
+    overflow: hidden;
+}

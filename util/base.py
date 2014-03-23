@@ -7,7 +7,6 @@
 from tornado.web import RequestHandler, MissingArgumentError, HTTPError
 import json
 
-import cache
 from config import configs
 
 
