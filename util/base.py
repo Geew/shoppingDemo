@@ -76,7 +76,6 @@ class BaseHandler(RequestHandler):
     def flash(self, msg):
         """ 消息闪现
         """
-        print '********* ', msg
         self.clear_cookie('message')
         self.set_cookie('message', msg)
 

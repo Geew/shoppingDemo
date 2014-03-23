@@ -42,14 +42,12 @@ class Item(HqOrm):
             order_by='item.created desc',
             fields='item.*, price.*',
         )
-        print 'items****: ', items
         result = {}
         for item in items:
             if item.id in result:
                 result[item.id].append(item)
             else:
                 result[item.id] = [item, ]
-        print 'result***: ', result
         return result
 
 
